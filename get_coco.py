@@ -19,7 +19,7 @@ images = coco.loadImgs(imgIds)
 print("imgIds: ", imgIds)
 print("images: ", images)
 
-for im in images[0:10]:
+for im in images:
     print("im: ", im)
     img_data = requests.get(im['coco_url']).content
 
@@ -36,8 +36,8 @@ for im in images[0:10]:
 with open('/media/darveen/DATADRIVE1/data/yolov3_training_ultralytics/training_prep/annotations_download_' + classes + '.txt', mode='w', newline='') as annot:
 
         for im in images:
-        annIds = coco.getAnnIds(imgIds=im['id'], catIds=catIds, iscrowd=None)
-        anns = coco.loadAnns(annIds)
+                annIds = coco.getAnnIds(imgIds=im['id'], catIds=catIds, iscrowd=None)
+                anns = coco.loadAnns(annIds)
 
         for i in range(len(anns)):
                 annot_writer = csv.writer(annot)
