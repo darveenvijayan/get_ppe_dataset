@@ -19,6 +19,7 @@ opencv-python==4.1.2.30
 pandas
 plotly==4.5.0
 psycopg2-binary==2.8.4
+pycocotools
 pylint
 scipy==1.4.1
 torch==1.4.0
