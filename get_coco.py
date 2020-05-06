@@ -67,6 +67,9 @@
 from pycocotools.coco import COCO
 import requests
 import csv
+import os
+
+working_dir = os.getcwd()
 
 coco = COCO('instances_train2017.json')
 cats = coco.loadCats(coco.getCatIds())
@@ -85,13 +88,13 @@ for im in images[0:10]:
         # print("im: ", im)
         img_data = requests.get(im['coco_url']).content
 
-        with open('/downloaded_images/' + im['file_name'], 'wb') as handler:
+        with open('working_dir/downloaded_images/' + im['file_name'], 'wb') as handler:
                 handler.write(img_data)
 
         annIds = coco.getAnnIds(imgIds=im['id'], catIds=catIds, iscrowd=None)
         anns = coco.loadAnns(annIds)
 
-        with open('/downloaded_images/'+im['file_name'] + '.txt', mode='w', newline='') as annot:
+        with open('working_dir/downloaded_images/'+im['file_name'] + '.txt', mode='w', newline='') as annot:
                 annot_writer = csv.writer(annot, delimiter=' ')
                 for i in range(len(anns)):
                         annot_writer.writerow([
