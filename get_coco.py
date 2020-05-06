@@ -84,7 +84,7 @@ images = coco.loadImgs(imgIds)
 # print("imgIds: ", imgIds)
 # print("images: ", images)
 
-for im in images[0:10]:
+for im in images:
         # print("im: ", im)
         img_data = requests.get(im['coco_url']).content
 
@@ -94,7 +94,8 @@ for im in images[0:10]:
         annIds = coco.getAnnIds(imgIds=im['id'], catIds=catIds, iscrowd=None)
         anns = coco.loadAnns(annIds)
 
-        with open('working_dir/downloaded_images/'+im['file_name'] + '.txt', mode='w', newline='') as annot:
+        with open('working_dir/downloaded_images/'+str(re.sub(r'.jpg','.txt',im['file_name'])) + '.txt', mode='w', newline='') as annot:
+                
                 annot_writer = csv.writer(annot, delimiter=' ')
                 for i in range(len(anns)):
                         annot_writer.writerow([
